@@ -10,9 +10,7 @@
       "GENERATE_SOURCEMAP": "false"
     }
   },
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/favicon.ico", "dest": "/assets/tcet-capture-logo.png" },
-    { "src": "/.*", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
