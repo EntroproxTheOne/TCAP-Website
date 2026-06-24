@@ -1,5 +1,5 @@
 backend/
-assets/
+/assets/
 node_modules/
 .cursor/
 *.mp4
