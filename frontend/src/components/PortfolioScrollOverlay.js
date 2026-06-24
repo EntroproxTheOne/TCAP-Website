@@ -3,14 +3,11 @@ import TCAPWordmark from './TCAPWordmark';
 import { CLIP } from './three/sceneLayout';
 
 const SCENE_MARKS = [
-  { id: 'vc', start: 0, end: CLIP.scene1End },
-  { id: 'photos', start: CLIP.scene2Start, end: CLIP.scene2End },
-  { id: 'editor', start: CLIP.scene3Start, end: CLIP.scene4Start },
-  { id: 'team', start: CLIP.scene4Start, end: 1 },
+  { id: 'vc', label: 'VC', start: 0, end: CLIP.scene1End },
+  { id: 'photos', label: 'Photos', start: CLIP.scene2Start, end: CLIP.scene2End },
+  { id: 'editor', label: 'Editor', start: CLIP.scene3Start, end: CLIP.scene4Start },
+  { id: 'team', label: 'Team', start: CLIP.scene4Start, end: 1 },
 ];
-
-/** Reserve right edge for scroll markers — side labels must stay left of this */
-const SCROLL_GUTTER = '4.5rem';
 
 const SIDE_LABELS = [
   { text: 'Videos', side: 'left', start: 0, end: CLIP.scene1End + 0.02 },
@@ -48,23 +45,23 @@ function SideLabel({ label, offset }) {
 
   const slide = (1 - visibility) * 48;
   const isLeft = label.side === 'left';
-  const isRight = label.side === 'right';
   const isTop = label.side === 'top';
 
+  // Inline transform must include translateY(-50%) — it overrides Tailwind translate classes.
   const style = {
     opacity: visibility,
     ...(isTop
       ? { transform: `translate(-50%, ${-slide}px)` }
       : isLeft
         ? { transform: `translateX(${-slide}px) translateY(-50%)` }
-        : { transform: `translateX(${slide}px) translateY(-50%)`, right: SCROLL_GUTTER }),
+        : { transform: `translateX(${slide}px) translateY(-50%)` }),
   };
 
   const positionClass = isTop
     ? 'top-[18%] left-1/2 text-center max-w-[calc(100%-2rem)]'
     : isLeft
       ? 'top-1/2 left-6 md:left-12 text-left max-w-[min(52vw,20rem)]'
-      : 'top-1/2 text-right max-w-[min(52vw,20rem)]';
+      : 'top-1/2 right-6 md:right-16 text-right max-w-[min(52vw,calc(100%-5rem))]';
 
   return (
     <div
@@ -88,40 +85,52 @@ function ScrollWheel({ offset }) {
 
   return (
     <div
-      className="fixed right-3 md:right-5 top-1/2 -translate-y-1/2 z-30 pointer-events-none"
-      aria-label={`Scroll progress, scene ${activeIdx + 1} of ${SCENE_MARKS.length}`}
+      className="fixed right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 pointer-events-none flex flex-col items-end gap-0"
+      aria-label="Scroll progress"
       role="progressbar"
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={Math.round(fillPct)}
     >
-      <div className="relative w-[2px] h-44 md:h-56 bg-white/10 rounded-full overflow-visible">
-        <div
-          className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-red-600 via-white/80 to-white rounded-full transition-[height] duration-75"
-          style={{ height: `${fillPct}%` }}
-        />
+      <div className="relative flex items-stretch gap-3">
+        <div className="relative w-[2px] h-44 md:h-56 bg-white/10 rounded-full overflow-hidden">
+          <div
+            className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-red-600 via-white/80 to-white rounded-full transition-[height] duration-75"
+            style={{ height: `${fillPct}%` }}
+          />
+        </div>
 
-        {SCENE_MARKS.map((mark, i) => {
-          const isActive = i === activeIdx;
-          const isPast = i < activeIdx;
-          const markerPct = clamp(((mark.start + mark.end) / 2) * 100, 4, 96);
-
-          return (
-            <span
-              key={mark.id}
-              className={`absolute left-1/2 rounded-full border transition-all duration-200 ${
-                isActive
-                  ? 'w-2.5 h-2.5 bg-white border-white shadow-[0_0_12px_rgba(255,255,255,0.6)]'
-                  : isPast
-                    ? 'w-2 h-2 bg-white/60 border-white/60'
-                    : 'w-1.5 h-1.5 bg-transparent border-white/30'
-              }`}
-              style={{ bottom: `${markerPct}%`, transform: 'translate(-50%, 50%)' }}
-              aria-hidden="true"
-            />
-          );
-        })}
+        <div className="relative h-44 md:h-56 flex flex-col justify-between py-0.5">
+          {SCENE_MARKS.map((mark, i) => {
+            const isActive = i === activeIdx;
+            const isPast = i < activeIdx;
+            return (
+              <div key={mark.id} className="flex items-center gap-2">
+                <span
+                  className={`font-condensed text-[9px] md:text-[10px] uppercase tracking-[0.2em] transition-colors duration-200 ${
+                    isActive ? 'text-white font-bold' : isPast ? 'text-white/50' : 'text-white/25'
+                  }`}
+                >
+                  {mark.label}
+                </span>
+                <span
+                  className={`block rounded-full border transition-all duration-200 ${
+                    isActive
+                      ? 'w-2.5 h-2.5 bg-white border-white shadow-[0_0_12px_rgba(255,255,255,0.6)]'
+                      : isPast
+                        ? 'w-2 h-2 bg-white/60 border-white/60'
+                        : 'w-1.5 h-1.5 bg-transparent border-white/30'
+                  }`}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
+
+      <p className="font-mono text-[8px] text-white/30 uppercase tracking-[0.35em] mt-3 mr-1">
+        Scroll
+      </p>
     </div>
   );
 }
