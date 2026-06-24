@@ -8,7 +8,8 @@
     "client": "cd frontend && npm start",
     "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install",
     "build:frontend": "cd frontend && npm install && npm run build",
-    "deploy:vercel": "cd frontend && npx vercel --prod"
+    "deploy:vercel": "cd frontend && npx vercel --prod",
+    "deploy:netlify": "npm run build:frontend && npx netlify deploy --prod --dir=frontend/build"
   },
   "keywords": [
     "photography",
