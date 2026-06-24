@@ -1,0 +1,6 @@
+backend/
+assets/
+node_modules/
+.cursor/
+*.mp4
+*.log
