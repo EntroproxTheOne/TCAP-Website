@@ -3,18 +3,24 @@ import TCAPWordmark from './TCAPWordmark';
 import { CLIP } from './three/sceneLayout';
 
 const SCENE_MARKS = [
-  { id: 'vc', label: 'VC', start: 0, end: CLIP.scene1End },
-  { id: 'photos', label: 'Photos', start: CLIP.scene2Start, end: CLIP.scene2End },
-  { id: 'editor', label: 'Editor', start: CLIP.scene3Start, end: CLIP.scene4Start },
-  { id: 'team', label: 'Team', start: CLIP.scene4Start, end: 1 },
+  { id: 'vc', start: 0, end: CLIP.scene1End },
+  { id: 'photos', start: CLIP.scene2Start, end: CLIP.scene2End },
+  { id: 'editor', start: CLIP.scene3Start, end: CLIP.scene4Start },
+  { id: 'team', start: CLIP.scene4Start, end: 1 },
 ];
 
 const SIDE_LABELS = [
-  { text: 'Videos', side: 'left', start: 0, end: CLIP.scene1End + 0.02 },
-  { text: 'Photos', side: 'right', start: CLIP.scene2Start, end: 0.46 },
-  { text: 'Social Media', side: 'left', start: 0.44, end: CLIP.scene2End },
-  { text: 'Creatives', side: 'right', start: CLIP.scene3Start, end: CLIP.scene4Start },
-  { text: 'Team', side: 'top', start: CLIP.scene4Start, end: 0.98 },
+  { id: 'videos', words: ['Videos'], side: 'left', start: 0, end: CLIP.scene1End + 0.02 },
+  { id: 'photos', words: ['Photos'], side: 'right', start: CLIP.scene2Start, end: 0.46 },
+  { id: 'social', words: ['Social Media'], side: 'left', start: 0.44, end: CLIP.scene2End },
+  {
+    id: 'creative-ops',
+    words: ['Creatives', 'Logistics', 'Reporting'],
+    side: 'right',
+    start: CLIP.scene3Start,
+    end: CLIP.scene4Start,
+  },
+  { id: 'team', words: ['Team'], side: 'top', start: CLIP.scene4Start, end: 0.98 },
 ];
 
 function clamp(v, min, max) {
@@ -47,7 +53,7 @@ function SideLabel({ label, offset }) {
   const isLeft = label.side === 'left';
   const isTop = label.side === 'top';
 
-  // Inline transform must include translateY(-50%) — it overrides Tailwind translate classes.
+  // Inline transform must include translateY(-50%) because it overrides Tailwind translate classes.
   const style = {
     opacity: visibility,
     ...(isTop
@@ -60,8 +66,8 @@ function SideLabel({ label, offset }) {
   const positionClass = isTop
     ? 'top-[18%] left-1/2 text-center max-w-[calc(100%-2rem)]'
     : isLeft
-      ? 'top-1/2 left-6 md:left-12 text-left max-w-[min(52vw,20rem)]'
-      : 'top-1/2 right-6 md:right-16 text-right max-w-[min(52vw,calc(100%-5rem))]';
+      ? 'top-1/2 left-6 md:left-12 text-left max-w-[min(55vw,20rem)]'
+      : 'top-1/2 right-[3.25rem] md:right-16 text-right max-w-[min(55vw,calc(100%-4.5rem))]';
 
   return (
     <div
@@ -69,9 +75,16 @@ function SideLabel({ label, offset }) {
       style={style}
       aria-hidden={visibility < 0.5}
     >
-      <p className="font-bold-display text-white/90 text-4xl md:text-6xl lg:text-7xl uppercase tracking-wider leading-none">
-        {label.text}
-      </p>
+      <div className="space-y-1 md:space-y-2">
+        {label.words.map((word) => (
+          <p
+            key={word}
+            className="font-bold-display text-white/90 text-3xl sm:text-4xl md:text-6xl lg:text-7xl uppercase tracking-wider leading-none"
+          >
+            {word}
+          </p>
+        ))}
+      </div>
       <div
         className={`mt-2 h-px bg-white/25 ${isTop ? 'mx-auto w-16' : isLeft ? 'w-12' : 'ml-auto w-12'}`}
       />
@@ -155,7 +168,7 @@ export default function PortfolioScrollOverlay({ scrollRef }) {
       </div>
 
       {SIDE_LABELS.map((label) => (
-        <SideLabel key={label.text} label={label} offset={offset} />
+        <SideLabel key={label.id} label={label} offset={offset} />
       ))}
 
       <ScrollWheel offset={offset} />

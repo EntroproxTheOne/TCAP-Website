@@ -186,7 +186,7 @@ Follow the prompts. Set **Root Directory** to `frontend` if asked.
 
 ### What's already configured
 
-- `frontend/vercel.json` — SPA routing (`/gallery`, `/admin` won't 404) + GLB cache headers  
+- `frontend/vercel.json` — filesystem-first routing for assets, SPA fallback, and Vercel-safe CRA build env  
 - `frontend/.env.example` — list of env vars for Vercel dashboard  
 - `.vercelignore` — skips backend/local assets from uploads  
 - `npm run deploy:vercel` — quick production deploy script  
@@ -197,6 +197,8 @@ Follow the prompts. Set **Root Directory** to `frontend` if asked.
 |---------|-----|
 | **404 on `/gallery` or refresh** | Root Directory must be `frontend` (so `vercel.json` is picked up). |
 | **`Treating warnings as errors because process.env.CI = true`** | Use `CI=false GENERATE_SOURCEMAP=false npm run build` as the Vercel Build Command. |
+| **Invalid `source` pattern in `vercel.json`** | Pull the latest code. The config avoids custom regex header rules. |
+| **`Could not load /assets/...glb: JSON.parse unexpected character`** | The `.glb` was being served as `index.html`. Pull latest code so Vercel uses filesystem-first routing before React fallback. |
 | **Build fails on Vercel** | Check build logs. Run `cd frontend && npm run build` locally first. |
 | **3D models missing** | GLB files must be in `frontend/public/assets/` and committed to Git. |
 | **Admin broken on live site** | Deploy backend elsewhere; set `REACT_APP_API_URL` in Vercel to that URL. |

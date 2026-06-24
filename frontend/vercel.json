@@ -4,28 +4,15 @@
   "buildCommand": "CI=false GENERATE_SOURCEMAP=false npm run build",
   "outputDirectory": "build",
   "installCommand": "npm install",
-  "rewrites": [
-    { "source": "/((?!static/).*)", "destination": "/index.html" }
-  ],
-  "headers": [
-    {
-      "source": "/assets/(.*\\.glb)",
-      "headers": [
-        { "key": "Content-Type", "value": "model/gltf-binary" },
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/assets/(.*\\.mp4)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/assets/(.*\\.webm)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
+  "build": {
+    "env": {
+      "CI": "false",
+      "GENERATE_SOURCEMAP": "false"
     }
+  },
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/favicon.ico", "dest": "/assets/tcet-capture-logo.png" },
+    { "src": "/.*", "dest": "/index.html" }
   ]
 }
