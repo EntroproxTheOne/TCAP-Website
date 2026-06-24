@@ -1,0 +1,379 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-body antialiased;
+    margin: 0;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .portfolio-root {
+    background: radial-gradient(ellipse at 50% 45%, #ff2222 0%, #ff0000 30%, #e60000 55%, #b30000 100%);
+    overflow: hidden;
+  }
+
+  .font-condensed {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  }
+
+  .font-bold-display {
+    font-family: 'Anton', Impact, sans-serif;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  }
+}
+
+/* ── Glass effects ── */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.frosted-glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.frosted-glass-dark {
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ── Glow blobs ── */
+.glow-blob {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.glow-red {
+  background: radial-gradient(circle, #ff0000 0%, transparent 70%);
+}
+
+/* ── Viewfinder overlay ── */
+.viewfinder-border {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  pointer-events: none;
+  z-index: 40;
+}
+
+.viewfinder-corner {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: rgba(255, 255, 255, 0.3);
+  border-style: solid;
+}
+
+.viewfinder-corner.tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; }
+.viewfinder-corner.tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; }
+.viewfinder-corner.bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; }
+.viewfinder-corner.br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; }
+
+/* ── Scroll reveal ── */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Gallery items ── */
+.gallery-item img {
+  filter: grayscale(100%);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+/* ── Glass cards ── */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.08);
+}
+
+/* ── CTA glow ── */
+.cta-glow {
+  position: relative;
+}
+
+.cta-glow::before {
+  content: '';
+  position: absolute;
+  inset: -15px;
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.35) 0%, transparent 70%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.cta-glow:hover::before {
+  opacity: 1;
+}
+
+/* ── Material icons ── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #555; }
+
+/* ── DatePicker (dark + red accent) ── */
+.react-datepicker {
+  font-family: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  background-color: #141218;
+}
+
+.react-datepicker__header {
+  background-color: #1a1a1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.react-datepicker__current-month,
+.react-datepicker__day-name { color: #e7e0e9; }
+
+.react-datepicker__day { color: #cac4d0; }
+.react-datepicker__day:hover,
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #ff0000;
+  color: #fff;
+}
+
+.react-datepicker__day--today { font-weight: bold; color: #ff0000; }
+
+.react-datepicker__input-container input {
+  background-color: transparent !important;
+  color: #e7e0e9 !important;
+  border: none !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 0 !important;
+}
+
+/* ── Gallery cards (EventCard) ── */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.gallery-card-item {
+  position: relative;
+  aspect-ratio: 1;
+  cursor: crosshair;
+  overflow: hidden;
+  background: #141218;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.4s ease;
+}
+
+.gallery-card-item:hover {
+  border-color: rgba(255, 0, 0, 0.5);
+}
+
+.gallery-card-content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gallery-card-item:hover .gallery-card-image {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.gallery-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent 60%);
+  z-index: 1;
+}
+
+.gallery-card-info {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.gallery-card-info h2 {
+  font-family: Syne, sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+
+.gallery-card-date {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: Geist, monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.gallery-card-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.gallery-card-buttons a {
+  flex: 1;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: all 0.3s;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.gallery-card-buttons a:hover {
+  background: #ff0000;
+  border-color: #ff0000;
+}
+
+/* ── Team cards ── */
+.team-portrait-card img {
+  filter: grayscale(100%);
+  transition: all 0.7s ease;
+}
+
+.team-portrait-card:hover img {
+  filter: grayscale(0%);
+}
+
+.team-portrait-card:hover {
+  border-color: rgba(255, 0, 0, 0.3) !important;
+  box-shadow: 0 0 40px rgba(255, 0, 0, 0.12);
+}
+
+/* ── Ghost form inputs ── */
+.ghost-input {
+  @apply w-full bg-transparent border-0 border-b border-white/20 focus:border-accent-red focus:ring-0 text-primary font-mono text-mono-technical px-0 py-4 transition-all placeholder:text-outline/40 outline-none;
+}
+
+/* ── Admin panel ── */
+.admin-tab-active {
+  border-left: 2px solid #ff0000;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.admin-tab {
+  @apply w-full text-left px-4 py-3 font-label text-label-caps uppercase text-on-surface-variant hover:text-primary hover:bg-white/5 transition-all border-l-2 border-transparent;
+}
+
+/* ── TCAP condensed wordmark (Muhaqu / Finals style) ── */
+.tcap-wordmark {
+  font-family: 'Bebas Neue', 'Anton', Impact, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 0.82;
+  color: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #d4d4d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(255, 0, 0, 0.15));
+}
+
+.tcap-wordmark-hero {
+  font-size: clamp(5rem, 22vw, 16rem);
+}
+
+.tcap-wordmark-lg {
+  font-size: clamp(3.5rem, 12vw, 8rem);
+}
+
+.tcap-wordmark-sm {
+  font-size: clamp(2rem, 8vw, 4rem);
+}
+
+.section-heading-bold {
+  font-family: 'Anton', Impact, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.label-condensed {
+  font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+}
