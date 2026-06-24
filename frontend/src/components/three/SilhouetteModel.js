@@ -5,9 +5,9 @@ import * as THREE from 'three';
 
 /** Per plan: dedicated GLB per scene */
 export const MODELS = {
-  videographer: '/assets/photographer+3d+model.glb',
-  photographer: '/assets/photographer+silhouette+3d+model.glb',
-  editor: '/assets/office+worker+3d+model.glb',
+  videographer: '/assets/photographer-3d-model.glb',
+  photographer: '/assets/photographer-silhouette-3d-model.glb',
+  editor: '/assets/office-worker-3d-model.glb',
   standing: '/assets/low_poly_male_base.glb',
 };
 
@@ -130,12 +130,12 @@ export function GLBSilhouette({
   );
 }
 
-/** Scene 1 — photographer+3d+model.glb (videographer behind camera) */
+/** Scene 1 — photographer-3d-model.glb (videographer behind camera) */
 export function VideographerSilhouette(props) {
   return <GLBSilhouette url={MODELS.videographer} targetHeight={1.9} {...props} />;
 }
 
-/** Scene 2 — photographer+silhouette+3d+model.glb */
+/** Scene 2 — photographer-silhouette-3d-model.glb */
 export function PhotographerSilhouette({ children, ...props }) {
   return (
     <GLBSilhouette url={MODELS.photographer} targetHeight={1.85} {...props}>
@@ -144,7 +144,7 @@ export function PhotographerSilhouette({ children, ...props }) {
   );
 }
 
-/** Scene 3 — office+worker+3d+model.glb (editor + desk) */
+/** Scene 3 — office-worker-3d-model.glb (editor + desk) */
 export function EditorSilhouette({
   position = [0, 0, 0],
   rotation = [0, 0, 0],
