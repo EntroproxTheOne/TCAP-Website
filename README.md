@@ -142,7 +142,7 @@ The **frontend** (3D portfolio + gallery) is set up for Vercel. The Express **ba
    |---------|--------|
    | **Root Directory** | `frontend` ← important |
    | **Framework Preset** | Create React App (auto-detected) |
-   | **Build Command** | `npm run build` |
+   | **Build Command** | `CI=false GENERATE_SOURCEMAP=false npm run build` |
    | **Output Directory** | `build` |
    | **Install Command** | `npm install` |
 
@@ -196,6 +196,7 @@ Follow the prompts. Set **Root Directory** to `frontend` if asked.
 | Problem | Fix |
 |---------|-----|
 | **404 on `/gallery` or refresh** | Root Directory must be `frontend` (so `vercel.json` is picked up). |
+| **`Treating warnings as errors because process.env.CI = true`** | Use `CI=false GENERATE_SOURCEMAP=false npm run build` as the Vercel Build Command. |
 | **Build fails on Vercel** | Check build logs. Run `cd frontend && npm run build` locally first. |
 | **3D models missing** | GLB files must be in `frontend/public/assets/` and committed to Git. |
 | **Admin broken on live site** | Deploy backend elsewhere; set `REACT_APP_API_URL` in Vercel to that URL. |
