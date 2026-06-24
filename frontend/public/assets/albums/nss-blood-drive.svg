@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="50%" stop-color="#3a0000"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <path d="M400 180 C400 180 340 240 340 290 C340 330 365 360 400 380 C435 360 460 330 460 290 C460 240 400 180 400 180Z" fill="#ff0000" opacity="0.25"/>
+  <text x="400" y="440" fill="#ffffff" font-family="Arial Black, sans-serif" font-size="28" text-anchor="middle">NSS BLOOD</text>
+  <text x="400" y="480" fill="#ff3333" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" letter-spacing="3">DONATION DRIVE</text>
+  <text x="400" y="530" fill="#666" font-family="Arial, sans-serif" font-size="18" text-anchor="middle">20 · 02 · 2026</text>
+</svg>

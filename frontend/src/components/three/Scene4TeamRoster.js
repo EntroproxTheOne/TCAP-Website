@@ -1,35 +1,41 @@
 import React, { useState } from 'react';
-import { useScroll, Html } from '@react-three/drei';
+import { useScroll, Html, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import { TEAM_ROSTER } from '../../data/teamRoster';
 import { useTeamSelection } from '../../context/TeamSelectionContext';
 import { scene4Opacity } from './sceneLayout';
 
-const HEAD_R = 0.32;
 const SPACING = 1.05;
+const SILHOUETTE_W = 0.52;
+const SILHOUETTE_H = 0.68;
+
+function SilhouetteCutout({ url }) {
+  const texture = useTexture(url);
+  texture.colorSpace = THREE.SRGBColorSpace;
+
+  return (
+    <mesh position={[0, SILHOUETTE_H / 2 + 0.06, 0]}>
+      <planeGeometry args={[SILHOUETTE_W, SILHOUETTE_H]} />
+      <meshBasicMaterial map={texture} transparent alphaTest={0.02} toneMapped={false} />
+    </mesh>
+  );
+}
 
 function TeamHeadCard({ member, labelVisible, onSelect }) {
   const [hovered, setHovered] = useState(false);
+  const silhouetteSrc = member.silhouetteUrl;
 
   return (
     <group>
-      <mesh position={[0, HEAD_R + 0.05, 0]}>
-        <cylinderGeometry args={[0.22, 0.28, 0.08, 24]} />
+      <mesh position={[0, 0.04, 0]}>
+        <cylinderGeometry args={[0.2, 0.26, 0.08, 24]} />
         <meshStandardMaterial color="#050505" roughness={0.9} metalness={0.05} />
       </mesh>
 
-      <mesh position={[0, HEAD_R + 0.45, 0]}>
-        <sphereGeometry args={[HEAD_R, 32, 32, 0, Math.PI * 2, 0, Math.PI * 0.55]} />
-        <meshBasicMaterial color="#080808" />
-      </mesh>
-
-      <mesh position={[0, HEAD_R + 0.12, 0]}>
-        <cylinderGeometry args={[HEAD_R * 0.55, HEAD_R * 0.65, 0.22, 24]} />
-        <meshBasicMaterial color="#060606" />
-      </mesh>
+      {silhouetteSrc && <SilhouetteCutout url={silhouetteSrc} />}
 
       <Html
-        position={[0, HEAD_R + 0.45, HEAD_R + 0.05]}
+        position={[0, SILHOUETTE_H / 2 + 0.1, 0.02]}
         center
         distanceFactor={9}
         style={{ pointerEvents: labelVisible ? 'auto' : 'none' }}

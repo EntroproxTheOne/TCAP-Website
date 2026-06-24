@@ -61,12 +61,19 @@ export default function TeamProfileModal() {
         </button>
 
         <div className="grid md:grid-cols-[140px_1fr] gap-0">
-          <div className="bg-black/40 p-6 flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10">
+          <div className="bg-gradient-to-b from-red-950/30 to-black/60 p-6 flex items-center justify-center border-b md:border-b-0 md:border-r border-white/10 min-h-[180px]">
             {selectedMember.photoUrl ? (
               <img
                 src={selectedMember.photoUrl}
                 alt={selectedMember.name}
-                className="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover border-2 border-white/20"
+                className="w-28 h-36 md:w-32 md:h-40 object-cover object-top border-2 border-white/20"
+              />
+            ) : selectedMember.silhouetteUrl ? (
+              <img
+                src={selectedMember.silhouetteUrl}
+                alt=""
+                className="w-24 h-32 md:w-28 md:h-36 object-contain object-bottom drop-shadow-[0_0_24px_rgba(255,0,0,0.15)]"
+                aria-hidden="true"
               />
             ) : (
               <div

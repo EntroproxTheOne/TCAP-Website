@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bg" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#2a0000"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="400" cy="300" r="80" fill="none" stroke="#fff" stroke-width="3" opacity="0.15"/>
+  <circle cx="400" cy="300" r="50" fill="none" stroke="#ff0000" stroke-width="2" opacity="0.4"/>
+  <text x="400" y="290" fill="#ffffff" font-family="Arial Black, sans-serif" font-size="36" text-anchor="middle">PHOTOWALK</text>
+  <text x="400" y="340" fill="#ff3333" font-family="Arial, sans-serif" font-size="40" text-anchor="middle">4.0</text>
+  <text x="400" y="420" fill="#666" font-family="Arial, sans-serif" font-size="18" text-anchor="middle">21 · 02 · 2026</text>
+</svg>

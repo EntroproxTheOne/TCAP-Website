@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <defs>
+    <linearGradient id="bg" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a0000"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <circle cx="400" cy="280" r="100" fill="#000"/>
+  <circle cx="370" cy="250" r="100" fill="#1a0000" opacity="0.9"/>
+  <text x="400" y="430" fill="#ffffff" font-family="Arial Black, sans-serif" font-size="44" text-anchor="middle" letter-spacing="6">ECLIPS</text>
+  <text x="400" y="480" fill="#ff3333" font-family="Arial, sans-serif" font-size="22" text-anchor="middle" letter-spacing="4">EVENT PHOTOS</text>
+  <text x="400" y="530" fill="#666" font-family="Arial, sans-serif" font-size="18" text-anchor="middle">FEB 2026</text>
+</svg>

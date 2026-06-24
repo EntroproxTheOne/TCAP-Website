@@ -29,6 +29,12 @@ export default function MinimalNavbar({ overlay = false }) {
 
           <div className="flex items-center gap-6 md:gap-8">
             <Link
+              to="/"
+              className="label-condensed text-sm text-white/70 hover:text-accent-red transition-colors"
+            >
+              Home
+            </Link>
+            <Link
               to="/gallery"
               className="label-condensed text-sm text-white/70 hover:text-accent-red transition-colors"
             >

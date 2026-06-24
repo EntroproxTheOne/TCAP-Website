@@ -21,7 +21,7 @@ export default function GalleryLinks() {
           </h1>
           <span className="h-[2px] w-24 bg-accent-red block mb-4" />
           <p className="font-body text-on-surface-variant max-w-2xl">
-            Browse TCAP event coverage. Click an album to open the full gallery on Google Photos or Google Drive.
+            Browse TCAP event coverage. Click an album to open the full gallery on Google Photos.
           </p>
         </div>
 
@@ -31,19 +31,24 @@ export default function GalleryLinks() {
               key={album.id}
               className="frosted-glass border border-white/10 overflow-hidden group hover:border-accent-red/40 transition-all"
             >
-              <div className="relative aspect-[4/3] overflow-hidden gallery-item">
+              <a
+                href={album.photosUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block relative aspect-[4/3] overflow-hidden gallery-item"
+              >
                 <img
                   src={album.thumbnail}
                   alt={album.name}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">
                   <p className="font-mono text-xs text-accent-red uppercase tracking-widest mb-1">{album.date}</p>
                   <h2 className="font-bold-display text-lg text-primary uppercase tracking-wide">{album.name}</h2>
                 </div>
-              </div>
-              <div className="p-4 flex flex-col gap-2">
+              </a>
+              <div className="p-4">
                 {album.photosUrl && (
                   <a
                     href={album.photosUrl}
@@ -51,17 +56,7 @@ export default function GalleryLinks() {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 w-full py-3 font-label text-label-caps uppercase bg-accent-red text-white hover:bg-white hover:text-background transition-all"
                   >
-                    Google Photos <FiExternalLink size={14} />
-                  </a>
-                )}
-                {album.driveUrl && (
-                  <a
-                    href={album.driveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 w-full py-3 font-label text-label-caps uppercase liquid-glass text-primary hover:bg-white/10 transition-all border border-white/10"
-                  >
-                    Google Drive <FiExternalLink size={14} />
+                    Open in Google Photos <FiExternalLink size={14} />
                   </a>
                 )}
               </div>
